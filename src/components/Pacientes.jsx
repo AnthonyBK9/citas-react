@@ -14,7 +14,7 @@ const Pacientes = () => {
             <span className="font-normal normal-case">antonio@gmail.com</span>
         </p>
         <p className="font-bold text-gray-700 uppercase">
-            Alta: {''}
+            Fecha de alta: {''}
             <span className="font-normal normal-case">24/03/2022</span>
         </p>
         <p className="font-bold text-gray-700 uppercase">

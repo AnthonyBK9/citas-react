@@ -1,26 +1,59 @@
 import {useState, useEffect} from 'react';
+import Error from './Error';
 
-
-const Form = () => {
+const Form = ({pacientes, setPacientes}) => {
 
   const [nombre, setNombre] = useState('');
+  const [propietario, setPropietario] = useState('');
+  const [email, setEmail] = useState('');
+  const [alta, setAlta] = useState('');
+  const [sintomas, setSintomas] = useState('');
 
+  const [error, setError] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    //Validar formulario
+    if([nombre, propietario, email, alta, sintomas].includes('')){
+      console.log('Hay un campo vacio')
+      setError(true)
+      return;
+    } 
+      setError(false)
+      //objetos de pacientes
+      const objPacientes = {
+        nombre, 
+        propietario, 
+        email, 
+        alta, 
+        sintomas
+      }
+      // console.log(obtPacientes)
+      setPacientes([...pacientes, objPacientes]);
+      //reiniciar el formulario
+      setNombre('');
+      setPropietario('');
+      setEmail('');
+      setAlta('');
+      setSintomas('');
+  }
   
 
   return (
-    <div className="md:w-1/2 lg:w-2/5">
+    <div className="md:w-1/2 lg:w-2/5 mx-5">
       <h2 className="font-black text-3xl text-center">Seguimiento Pacientes</h2>
 
       <p className="text-lg mt-5 text-center mb-10">Añade Pacientes y {''}
         <span className="text-indigo-600 font-bold">Administralos</span>
       </p>
 
-      <form action="" className="bg-white shadow-md rounded-xl py-10 px-5 mb-10">
+      <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-xl py-10 px-5 mb-10">
+        {error && <Error  mensaje='Todos los campos son obligatorios' />}
         <div className="mb-5">
           <label 
             htmlFor="nombre" 
             className="block text-gray-700 uppercase font-bold">
-            Nombre Macota {nombre}
+            Nombre Macota
           </label>
           <input 
             id="nombre"
@@ -42,6 +75,8 @@ const Form = () => {
             type="text"  
             placeholder="Nombre del propietario" 
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md" 
+            value={propietario}
+            onChange={ e => setPropietario(e.target.value)}
           />
         </div>
         <div className="mb-5">
@@ -54,7 +89,9 @@ const Form = () => {
             id="email"
             type="email"  
             placeholder="Email Contacto Propietario" 
-            className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md" 
+            className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+            value={email}
+            onChange={ e => setEmail(e.target.value)}
           />
         </div>
         <div className="mb-5">
@@ -67,6 +104,8 @@ const Form = () => {
             id="alta"
             type="date"  
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md" 
+            value={alta}
+            onChange={ e => setAlta(e.target.value)}
           />
         </div>
         <div className="mb-5">
@@ -79,6 +118,8 @@ const Form = () => {
             id="sintomas"
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
             placeholder="Describe los sintomas"
+            value={sintomas}
+            onChange={ e => setSintomas(e.target.value)}
           />
         </div>
         <input 

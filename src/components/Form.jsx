@@ -1,8 +1,12 @@
 import {useState, useEffect} from 'react';
 
 
-
 const Form = () => {
+
+  const [nombre, setNombre] = useState('');
+
+  
+
   return (
     <div className="md:w-1/2 lg:w-2/5">
       <h2 className="font-black text-3xl text-center">Seguimiento Pacientes</h2>
@@ -16,13 +20,15 @@ const Form = () => {
           <label 
             htmlFor="nombre" 
             className="block text-gray-700 uppercase font-bold">
-            Nombre Macota
+            Nombre Macota {nombre}
           </label>
           <input 
             id="nombre"
             type="text"  
             placeholder="Nombre de la mascota" 
-            className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md" 
+            className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+            value={nombre}
+            onChange={ (e) => setNombre(e.target.value)}
           />
         </div>
         <div className="mb-5">

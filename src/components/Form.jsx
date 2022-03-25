@@ -48,7 +48,7 @@ const Form = ({pacientes, setPacientes}) => {
       </p>
 
       <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-xl py-10 px-5 mb-10">
-        {error && <Error  mensaje='Todos los campos son obligatorios' />}
+        { error && <Error>Todos los campos son obligatorios</Error>}
         <div className="mb-5">
           <label 
             htmlFor="nombre" 
